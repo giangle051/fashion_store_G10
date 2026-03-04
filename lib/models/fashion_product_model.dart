@@ -19,7 +19,13 @@ class FashionProduct {
 
   factory FashionProduct.fromFirestore(Map<String, dynamic> data, String id) {
     final imageValue =
-        (data['image'] as String?) ?? (data['imageURL'] as String?) ?? '';
+        ((data['image'] as String?) ??
+                (data['imageURL'] as String?) ??
+                (data['imageUrl'] as String?) ??
+                (data['image_url'] as String?) ??
+                (data['hinh_anh'] as String?) ??
+                '')
+            .trim();
     final descriptionValue =
         (data['description'] as String?) ??
         (data['moTa'] as String?) ??
