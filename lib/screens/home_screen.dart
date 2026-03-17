@@ -33,15 +33,12 @@ class _HomeScreenState extends State<HomeScreen> {
       _errorMessage = '';
     });
 
-    // Làm chậm quá trình tải 10 giây để dễ dàng xem trạng thái "Đang tải (Loading)"
     await Future.delayed(const Duration(seconds: 10));
 
     try {
-      // Bắt đầu: Giả lập tình huống mất mạng/lỗi kết nối theo yêu cầu
       if (_simulateError) {
         throw Exception('Mất kết nối mạng (Giả lập). Vui lòng kiểm tra lại!');
       }
-      // Kết thúc giả lập
 
       final products = await _firestoreService.fetchFashionProducts();
       if (!mounted) {
@@ -197,7 +194,6 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: const Text('TH3 - Lê Thu Giang - 2351060438'),
         actions: [
-          // Nút này để sinh viên giả lập tính huống mất mạng
           IconButton(
             icon: Icon(
               _simulateError ? Icons.wifi_off_rounded : Icons.wifi_rounded,
@@ -223,7 +219,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   duration: const Duration(seconds: 2),
                 ),
               );
-              // Tự động gọi lại dữ liệu luôn để demo cho nhanh
+
               if (_currentIndex == 0) {
                 _loadProducts();
               }
